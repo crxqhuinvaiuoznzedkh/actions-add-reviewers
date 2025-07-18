@@ -19,6 +19,10 @@ inputs:
     description: "Run the action in debug mode and get debug logs printed in console"
     required: false
     default: "false"
+  omit-reviewer:
+    description: "When a reviewer requested the PR, omit them from the PR Reviewers list"
+    required: false
+    default: "false"
 
 runs:
   using: "node12"

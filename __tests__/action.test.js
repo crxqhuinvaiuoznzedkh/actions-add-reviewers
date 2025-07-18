@@ -153,6 +153,7 @@ describe("Pull Request event", function () {
                     case 'reviewers': return inputReviewers;
                     case 're-request-when-changes-requested': return "true";
                     case `re-request-when-approved`: return "true";
+                    case 'omit-reviewer': return 'true';
                 }
             });
             const addReviewers = jest.fn();
