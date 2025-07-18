@@ -1,4 +1,5 @@
 # Add Reviewers
+Forked from Madrapps
 [![Tests](https://github.com/Madrapps/add-reviewers/actions/workflows/check.yml/badge.svg)](https://github.com/Madrapps/add-reviewers/actions/workflows/check.yml)
 
 Github action that adds Reviewers to the Pull Request
@@ -14,6 +15,7 @@ Create a workflow `.yml` file in your repositories `.github/workflows` directory
 * `reviewers` - [**required**] Comma separated list of reviewers [eg. john,kramer,seinfeld]
 * `re-request-when-changes-requested` - [*optional*] If true, when a reviewer has requested for changes, pushing a new commit to this PR will Re-request a review from them
 * `re-request-when-approved` - [*optional*] If true, when a reviewer has approved, pushing a new commit to this PR will Re-request a review from them
+* `omit-reviewer` - [*optional*] If true, when a reviewer is the PR submitter, omit from reviewers list
 
 
 ### Example Workflow
@@ -35,6 +37,7 @@ jobs:
         reviewers: john,kramer,seinfeld
         re-request-when-approved: true
         re-request-when-changes-requested: true
+        omit-reviewer: true
 ```
 
 ### Example Project

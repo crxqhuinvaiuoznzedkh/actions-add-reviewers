@@ -3,7 +3,8 @@ const github = require('@actions/github');
 
 async function action() {
     try {
-        const reviewers = core.getInput('reviewers').split(",");
+        const omitReviewer = (core.getInput('omit-reviewer') === 'true')
+        let reviewers = core.getInput('reviewers').split(",")
         const reRequestWhenChangesRequested = (core.getInput('re-request-when-changes-requested') === 'true');
         const reRequestWhenApproved = (core.getInput('re-request-when-approved') === 'true');
         const debugMode = (core.getInput('debug-mode') === 'true');
@@ -19,6 +20,9 @@ async function action() {
         const payload = context.payload;
         const prNumber = payload.pull_request.number;
         const user = payload.pull_request.user.login;
+
+        // Remove the current user who created the PR
+        if(omitReviewer) reviewers = reviewers.filter(x => x !== user)
 
         if (debugMode) core.info(`prNumber: ${prNumber}`);
         if (debugMode) core.info(`user: ${user}`);
@@ -42,11 +46,8 @@ async function action() {
                 core.info(`${key} = ${value}`);
             });
         }
-
-        // Remove the current user who created the PR
-        const userRemovedReviewers = reviewers.filter(reviewer => reviewer != user);
         const finalReviewers = [];
-        userRemovedReviewers.forEach(reviewer => {
+        reviewers.forEach(reviewer => {
             const rev = reviews.get(reviewer);
             if (rev == null) {
                 if (debugMode) core.info(`New Reviewer: Request review from ${reviewer}`);
