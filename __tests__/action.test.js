@@ -59,6 +59,7 @@ describe("Pull Request event", function () {
             core.getInput = jest.fn(c => {
                 switch (c) {
                     case 'reviewers': return inputReviewers;
+                    case `omit-reviewer`: return 'true';
                 }
             });
             const addReviewers = jest.fn();
@@ -89,6 +90,7 @@ describe("Pull Request event", function () {
                     case 'reviewers': return inputReviewers;
                     case 're-request-when-changes-requested': return "true";
                     case `re-request-when-approved`: return "false";
+                    case `omit-reviewer`: return 'true';
                 }
             });
             const addReviewers = jest.fn();
@@ -121,6 +123,7 @@ describe("Pull Request event", function () {
                     case 'reviewers': return inputReviewers;
                     case 're-request-when-changes-requested': return "false";
                     case `re-request-when-approved`: return "true";
+                    case `omit-reviewer`: return 'true';
                 }
             });
             const addReviewers = jest.fn();
