@@ -1,4 +1,4 @@
-name: "Add Reviewers"
+name: "Add Reviewers to GitHub PR"
 description: "Add reviewers to your Pull Request"
 inputs:
   token:
